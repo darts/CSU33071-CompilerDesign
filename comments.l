@@ -1,13 +1,11 @@
 %{
-
-%}
+%} 
 
 %%
-\"(.|\n)*\"      {printf("%s", yytext);}
-"**".*      {} //ignore line of comments starting with **
-"{"(.|\n)*"}"        {} //
-.     {printf("%s", yytext);}
-
+\"(.|\n)*\"     {printf("%s", yytext);}
+"**".*     	    {} //ignore line of comments starting with **
+"{"[^\}]*"}"    {} //ignore comments in curly braces
+\}|\{	 	    {printf("syntax error\n"); return 0;}
 %%
 
 int main()
