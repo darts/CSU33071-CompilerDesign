@@ -3,10 +3,10 @@
 %}
 
 %%
-"**"[.]+[\n]        {} //ignore line of comments starting with **
-"{"[.\n]+"}"        {} //
-"{"|"}"             {printf("syntax error\n");}
-.|\n                {printf("%s", yytext);}
+\"(.|\n)*\"      {printf("%s", yytext);}
+"**".*      {} //ignore line of comments starting with **
+"{"(.|\n)*"}"        {} //
+.     {printf("%s", yytext);}
 
 %%
 
