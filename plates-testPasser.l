@@ -15,11 +15,12 @@ NEWCHARS C|CE|CN|CW|D|DL|G|KE|KK|KY|L|LK|LD|LH|LM|LS|MH|MN|MO|OY|RN|SO|TN|TS|W|W
 
 CARNUM ([1-9][0-9]{0,5})
 
-IGNORESTUFF (\n|.)
+IGNORESTUFF ((\n|" ")*)
+ERRSTUFF (.+)
 
 %%
-{IGNORESTUFF}   {printf("%s", yytext);}
-{OLDYEAR}(-){OLDCHARS}(-){CARNUM} {
+{IGNORESTUFF}   {printf("%s", yytext);}                 
+({IGNORESTUFF}{OLDYEAR}(-){OLDCHARS}(-){CARNUM}) {
                                         char yearStr[] = {yytext[0], yytext[1], '\0'}; 
                                         int year = atoi(yearStr);
                                         if(year >= 87 || year <= 12)
@@ -27,8 +28,7 @@ IGNORESTUFF (\n|.)
                                         else
                                             printf("INVALID\n");
                                     }
-
-{NEWYEAR}(-){NEWCHARS}(-){CARNUM} {
+({IGNORESTUFF}{NEWYEAR}(-){NEWCHARS}(-){CARNUM}) {
                                         char yearStr[] = {yytext[0], yytext[1], '\0'}; 
                                         int year = atoi(yearStr);
                                         if(year >= newStart && year <= currentYearVal)
@@ -36,8 +36,7 @@ IGNORESTUFF (\n|.)
                                         else
                                             printf("INVALID\n");
                                     }
-
-
+{ERRSTUFF} {printf("INVALID");}
 %%
 
 int main(){
