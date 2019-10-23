@@ -35,6 +35,6 @@ int main(){
 }
 
 void yyerror(char *s){
-    fprintf(stderr, "%s\n", s);
+    printf("syntax error");
     exit(0);
 }

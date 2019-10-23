@@ -4,6 +4,8 @@
 void yyerror(char *s);
 %}
 
+ERR_VALS (([^IVXLCDM\n]*)|(I[^I\n]I)|(V[^V(IV)\n]V)|(X[^X(IX)\n]X)|(L[^L(XL)\n]L)|(C[^C(XC)\n]C)|(D[^D(CD)\n]D)|(M[^M(CM)\n]M))
+
 %%
 IV      {yylval.num = 4; return NUMBER;}
 IX      {yylval.num = 9; return NUMBER;}
@@ -19,4 +21,8 @@ C       {yylval.num = 100; return NUMBER;}
 D       {yylval.num = 500; return NUMBER;}
 M       {yylval.num = 1000; return NUMBER;}
 \n      {return EOL;}
+{ERR_VALS} {
+            printf("syntax error\n");
+            exit(0);
+            }
 %%
