@@ -14,10 +14,17 @@ void yyerror(char *s);
 
 %token EOL
 %token <num> NUMBER
-
+%type <num> number letters
 %%
-calclist:
-| NUMBER EOL {printf("%d\n", $1);}
+numlist:  
+ | numlist number EOL { printf("%d\n", $2); } 
+ ;
+
+number: letters
+| number letters {$$ = $1 + $2}
+;
+
+letters:NUMBER {$$ = yylval.num}
 ;
 
 %%
