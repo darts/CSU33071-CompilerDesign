@@ -3,3 +3,5 @@
 *.c
 *.out
 *.7z
+Extern/*
+*.h

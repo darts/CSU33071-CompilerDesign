@@ -1,20 +1,10 @@
 %{
-
+#include "roman.tab.h"
+#include <string.h>
+void yyerror(char *s);
 %}
 
-VALID_CHARS [IVXLCDM]+
-ERR_CHARS [.]+
 %%
-{VALID_CHARS}   {
-
-                }
-                
-{ERR_CHARS}     {
-
-                }
-
+I{1,3}  {yylval = strlen(yytext); return NUMBER;}
+\n      {return EOL;}
 %%
-
-int main(){
-    yylex();
-}
