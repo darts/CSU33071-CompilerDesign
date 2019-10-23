@@ -16,10 +16,12 @@ void yyerror(char *s);
 %token <num> NUMBER
 %type <num> number letters
 %%
+/* generates a list recursively */
 numlist:  
  | numlist number EOL { printf("%d\n", $2); } 
  ;
 
+/* adds 2 numbers */
 number: letters
 | number letters {$$ = $1 + $2;}
 ;
