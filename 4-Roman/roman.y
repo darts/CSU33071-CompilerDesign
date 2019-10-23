@@ -21,10 +21,10 @@ numlist:
  ;
 
 number: letters
-| number letters {$$ = $1 + $2}
+| number letters {$$ = $1 + $2;}
 ;
 
-letters:NUMBER {$$ = yylval.num}
+letters:NUMBER {$$ = yylval.num;}
 ;
 
 %%
@@ -35,5 +35,6 @@ int main(){
 }
 
 void yyerror(char *s){
-    fprintf(stderr, "err: %s\n", s);
+    fprintf(stderr, "%s\n", s);
+    exit(0);
 }
