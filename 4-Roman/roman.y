@@ -26,7 +26,8 @@ number: letters
 | number letters {$$ = $1 + $2;}
 ;
 
-letters:NUMBER {$$ = yylval.num;}
+letters:
+| NUMBER {$$ = yylval.num;}
 ;
 
 %%

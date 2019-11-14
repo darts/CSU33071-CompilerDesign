@@ -5,7 +5,7 @@ void yyerror();
 
 %%
 I             { return ONE; }
-V       	    { return FIVE; }
+V       	  { return FIVE; }
 X             { return TEN; }
 L             { return FIFTY; }
 C             { return HUNDRED; }

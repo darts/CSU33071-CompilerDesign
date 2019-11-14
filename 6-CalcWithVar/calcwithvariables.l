@@ -16,9 +16,13 @@ VALID_ARITH ((IGNORE_WHITESPACE)(OPERATOR)(IGNORE_WHITESPACE)(VAR|VALID_NUM)(IGN
 %%
 VALID_VAR           {return VAR;}
 ASSIGN              {return ASS;}
-VALID_NUM           {return NUM;}
+VALID_NUM           {yylval.num = atoi(yytext); return NUM;}
 TERMINATOR          {return END;}
-OPERATOR            {return OPR;}
+"+"                 {return ADD;}
+"-"                 {return SUB;}
+"/"                 {return DIV;}
+"*"                 {return MUL;}
+"print "            {return PNT;}
 
 IGNORE_WHITESPACE   {}
 
