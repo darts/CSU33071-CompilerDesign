@@ -16,7 +16,8 @@ int write_addr;
 }
 
 %token ASS EOL END PNT VAR ADD SUB DIV MUL NUM
-%type <num> var full_expr NUM sub_expr
+%type <num> lvar full_expr NUM sub_expr
+%type <char> VAR
 %%
 
 calclist: /* nothing */
@@ -25,27 +26,27 @@ calclist: /* nothing */
 
 /* a valid input string */
 full_expr: val_var sub_expr END  {var_arr[write_addr] = $2;}
-| PNT var END                    {printf("%d", $2);}
+| val_var lvar END                {var_arr[write_addr] = $2;}
+| PNT lvar END                    {printf("%d", $2);}
 ; 
 
 /* sub expression for a full one */
-sub_expr: var ADD var       {$$ = $1 + $3;}
-| var SUB var       {$$ = $1 - $3;}
-| var MUL var       {$$ = $1 * $3;}
-| var DIV var       {$$ = $1 / $3;}
-| sub_expr ADD var  {$$ = $$ + $3;}
-| sub_expr SUB var  {$$ = $$ - $3;}
-| sub_expr MUL var  {$$ = $$ * $3;}
-| sub_expr DIV var  {$$ = $$ / $3;}
-| var               {$$ = $1;}
+sub_expr: lvar ADD lvar       {$$ = $1 + $3;}
+| lvar SUB lvar       {$$ = $1 - $3;}
+| lvar MUL lvar       {$$ = $1 * $3;}
+| lvar DIV lvar       {$$ = $1 / $3;}
+| sub_expr ADD lvar  {$$ = $$ + $3;}
+| sub_expr SUB lvar  {$$ = $$ - $3;}
+| sub_expr MUL lvar  {$$ = $$ * $3;}
+| sub_expr DIV lvar  {$$ = $$ / $3;}
 ;
 
 /* the only legal start to a sentence */
-val_var: VAR ASS      {}
+val_var: VAR ASS      {write_addr = $1; write_addr = genOffset(write_addr);}
 ;
 
 /* a place to keep your numbers */
-var: VAR        {write_addr = genOffset(yylval.varchar); $$ = var_arr[write_addr];}
+lvar: VAR        {$$ = var_arr[genOffset(yylval.varchar)];}
 | NUM        {$$ = yylval.num;}
 ;
 %%
