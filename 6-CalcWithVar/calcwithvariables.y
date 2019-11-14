@@ -25,34 +25,25 @@ int write_addr;
 	int num;
 }
 
-%token <num> NUMBER
-
+%token ASS EOL END PNT VAR
+%token <num> NUM
+%type <num> var full_expr
 %%
 calclist: /* nothing */
-| calclist expr EOL { }
+| calclist full_expr EOL { }
 ;
 
-full_expr:
-| val_var 
-| val_var 
-| PNT VAR END      {printf("%d", var_arr[write_addr]);}
+full_expr: 
+| val_var sub_expr END  {var_arr[write_addr] = $2;}
+| PNT var END           {printf("%d", $2);}
 ; 
 
-expr: 
-| var 
-|
-;
-
-eqn:
-| 
-;
-
-val_var: 
-| var ASS      {}
+val_var: /* the only legal start to a sentence */
+| VAR ASS      {}
 ;
 
 var: 
-| VAR        {write_addr = genOffset(yytext);}
+| VAR        {write_addr = genOffset(yytext); $$ = var_arr[write_addr];}
 | NUM        {$$ = yylval.num;}
 ;
 
