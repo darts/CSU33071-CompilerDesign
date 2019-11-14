@@ -25,7 +25,7 @@ calclist: /* nothing */
 
 /* a valid input string */
 full_expr: val_var sub_expr END  {var_arr[write_addr] = $2;}
-| PNT var END           {printf("%d", $2);}
+| PNT var END                    {printf("%d", $2);}
 ; 
 
 /* sub expression for a full one */

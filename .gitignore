@@ -5,3 +5,4 @@
 *.7z
 Extern/*
 *.h
+*.gch
