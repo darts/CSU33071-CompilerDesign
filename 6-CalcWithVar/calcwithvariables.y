@@ -37,6 +37,7 @@ sub_expr: var ADD var       {$$ = $1 + $3;}
 | sub_expr SUB var  {$$ = $$ - $3;}
 | sub_expr MUL var  {$$ = $$ * $3;}
 | sub_expr DIV var  {$$ = $$ / $3;}
+| var               {$$ = $1;}
 ;
 
 /* the only legal start to a sentence */
@@ -58,7 +59,7 @@ int main(){
 //return the actual address of a variable
 int genOffset(char *var){
     int i = atoi(var);
-    return (var - 97);
+    return (i - 97);
 }
 
 
