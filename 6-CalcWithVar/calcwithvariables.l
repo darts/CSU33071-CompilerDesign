@@ -14,7 +14,7 @@ VALID_ASSIGNMENT ((IGNORE_WHITESPACE)(VALID_VAR)(IGNORE_WHITESPACE)(ASSIGN)(IGNO
 VALID_ARITH ((IGNORE_WHITESPACE)(OPERATOR)(IGNORE_WHITESPACE)(VAR|VALID_NUM)(IGNORE_WHITESPACE))
 
 %%
-VALID_VAR           {return VAR;}
+VALID_VAR           {yylval.varchar = *yytext; return VAR;}
 ASSIGN              {return ASS;}
 VALID_NUM           {yylval.num = atoi(yytext); return NUM;}
 TERMINATOR          {return END;}
