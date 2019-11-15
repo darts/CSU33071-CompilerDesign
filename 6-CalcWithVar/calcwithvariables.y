@@ -13,11 +13,11 @@ int offSet = 97;
 
 %%
 calclist: expr 
-|calclist expr
+| calclist expr
 ;
 
 expr: VAR ASS sub_expr END {var_arr[$1-97] = $3;}
-| PNT variable END {printf("%d\n", $2);}
+| PNT variable END     {printf("%d\n", $2);}
 | VAR ASS variable END {var_arr[$1-97] = $3;}
 ;
 
@@ -32,7 +32,7 @@ sub_expr: variable ADD variable {$$ = $1 + $3;}
 ;
 
 variable: VAR {$$ = var_arr[$1-offSet];}
-| NUM {$$ = $1;}
+| NUM     {$$ = $1;}
 | SUB NUM {$$ = $2 * (-1);}
 | SUB VAR {$$ = var_arr[$1-offSet]; $$ = $$ * (-1);}
 ;
