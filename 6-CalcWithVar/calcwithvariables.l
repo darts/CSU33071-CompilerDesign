@@ -15,5 +15,6 @@ void yyerror(char *s);
 "print " {return PNT;}
 ";" {return END;}
 [\t\n" "]
+. {yyerror(yytext);}
 %%
 

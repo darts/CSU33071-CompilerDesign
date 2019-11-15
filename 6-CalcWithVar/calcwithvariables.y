@@ -43,6 +43,6 @@ int main(){
 }
 
 void yyerror(char *s){
-    printf("syntax error");
+    printf("syntax error\n");
     exit(0);
 }
