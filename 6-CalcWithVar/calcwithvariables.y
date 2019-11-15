@@ -5,6 +5,7 @@
 
 int yylex();
 void yyerror(char *s);
+int genOffset(char *var);
 int var_arr[26]; 
 int write_addr;
 %}
@@ -21,7 +22,7 @@ int write_addr;
 %%
 
 calclist: /* nothing */
-| calclist full_expr EOL { }
+| calclist full_expr END { }
 ;
 
 /* a valid input string */

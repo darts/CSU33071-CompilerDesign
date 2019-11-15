@@ -10,11 +10,12 @@ ASSIGN (":=")
 VALID_NUM ([0-9])
 TERMINATOR (";")
 OPERATOR (["-""*""+""/"])
+VALID_ASS ((VALID_VAR)(ASSIGN))
 VALID_ASSIGNMENT ((IGNORE_WHITESPACE)(VALID_VAR)(IGNORE_WHITESPACE)(ASSIGN)(IGNORE_WHITESPACE)(VAR|VALID_NUM)((VALID_ARITH)*)(TERMINATOR))
 VALID_ARITH ((IGNORE_WHITESPACE)(OPERATOR)(IGNORE_WHITESPACE)(VAR|VALID_NUM)(IGNORE_WHITESPACE))
 
 %%
-VALID_VAR           {yylval.varchar = *yytext; return VAR;}
+VALID_VAR           {yylval.varchar = yytext[0]; return VAR;}
 ASSIGN              {return ASS;}
 VALID_NUM           {yylval.num = atoi(yytext); return NUM;}
 TERMINATOR          {return END;}

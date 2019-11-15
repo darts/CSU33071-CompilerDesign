@@ -17,7 +17,7 @@ On MacOX:
 ```
 > flex FILENAME.l
 > bison -d OTHER_FILE.y
-> gcc OTHER_FILE.tab.h lex.yy.c -ll
+> gcc OTHER_FILE.tab.c lex.yy.c -ll
 ```
 I presume the procedure is similar on Linux and Windows but I haven't checked. 
 <br><br>
