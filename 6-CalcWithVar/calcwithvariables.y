@@ -25,6 +25,10 @@ sub_expr: variable ADD variable {$$ = $1 + $3;}
 | variable SUB variable {$$ = $1 - $3;}
 | variable MUL variable {$$ = $1 * $3;}
 | variable DIV variable {$$ = $1 / $3;}
+| sub_expr ADD variable {$$ = $1 + $3;}
+| sub_expr SUB variable {$$ = $1 - $3;}
+| sub_expr MUL variable {$$ = $1 * $3;}
+| sub_expr DIV variable {$$ = $1 / $3;}
 ;
 
 variable: VAR {$$ = var_arr[$1-offSet];}
