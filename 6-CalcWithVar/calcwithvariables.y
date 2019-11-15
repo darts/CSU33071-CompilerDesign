@@ -33,6 +33,8 @@ sub_expr: variable ADD variable {$$ = $1 + $3;}
 
 variable: VAR {$$ = var_arr[$1-offSet];}
 | NUM {$$ = $1;}
+| SUB NUM {$$ = $2 * (-1);}
+| SUB VAR {$$ = var_arr[$1-offSet]; $$ = $$ * (-1);}
 ;
 %%
 
