@@ -1,5 +1,5 @@
 %{
-#include "newcalcwithvariables.tab.h"
+#include "calcwithvariables.tab.h"
 #include <string.h>
 void yyerror(char *s);
 %}
