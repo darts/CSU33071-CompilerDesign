@@ -9,16 +9,16 @@ int var_arr[26];
 int offSet = 97;
 %}
 
-%token ASS EOL END PNT VAR ADD SUB DIV MUL NUM
+%token ASS END PNT VAR ADD SUB DIV MUL NUM
 
 %%
 calclist: expr 
 | calclist expr
 ;
 
-expr: VAR ASS sub_expr END {var_arr[$1-97] = $3;}
+expr: VAR ASS sub_expr END {var_arr[$1-offSet] = $3;}
 | PNT variable END     {printf("%d\n", $2);}
-| VAR ASS variable END {var_arr[$1-97] = $3;}
+| VAR ASS variable END {var_arr[$1-offSet] = $3;}
 ;
 
 sub_expr: variable ADD variable {$$ = $1 + $3;}
