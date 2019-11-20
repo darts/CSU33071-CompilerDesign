@@ -5,7 +5,7 @@ void yyerror(char *s);
 %}
 
 %%
-[a-z]       {yylval = yytext[0]; return VAR;}
+[a-z]       {yylval = (yytext[0] - 'a'); return VAR;}
 [0-9]       {yylval = atoi(yytext); return NUM;}
 ":="        {return ASS;}
 "+"         {return ADD;}
